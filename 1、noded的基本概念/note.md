@@ -13,3 +13,61 @@ node: 是一个运行时（运行环境）
 - 同步阻塞：java     异步非阻塞:node 
 - node中主线程是单线程，但是底层libuv是基于多线程模型 (eventLoop) ，node也支持多进程。
 
+
+## node的未来？
+- 工具：gulp 、 webpack 、rollup 、 vite (node来实现。因为前端学起来容易点) 为前端工程化老服务
+- 服务端渲染： ssr (vue/react  seo优化)  node天生支持js,所以可以用来解析 vue/react 达到服务端渲染的目的 （预渲染插件）
+- bff： 中间层、用他来做服务端 ，(为前端提供服务端后端) ， 可以解决跨域问题  （数据格式化、请求代理、调用微服务等） 
+  
+> 因为node 用的是JS ，所有很容易上手。通过node可以让前端更加容易了解后端
+
+
+## node中的模块
+- 为什么要有模块？   
+    - 命名冲突  方便复用，维护方便， 前端解决方案：1) 单例模式  2)自执行函数 
+    ```js
+      //单例模式  
+      let obj = {
+        init(){
+
+        }
+      }; 
+      let obj2 = {
+        init(){
+          
+        }
+      };
+
+      obj.init();
+      obj2.init();
+
+      //自执行函数  
+      function fn(){
+        return ()=>{
+
+        }
+      }
+
+      function fn2(){
+        return ()=>{
+
+        }
+      }
+
+      let a = fn();
+      let b = fn2();
+    ```
+    - 依赖模块 高内聚、低耦合  3)requirejs seajs esModule(现在主要用的是esModule，export import)  systemjs(jsop回调) ，浏览器的模块化实现 需要基于请求
+
+-node中的模块处理： commjs规范（描述怎么使用）
+    - 任何一个js文件都是一个模块（每个文件都是模块）
+    - let Promise = require('./promise') 引入 ， node会读取某个文件 拿到内容实现模块化
+    - module.exports = xxx; 抛出去，让别人引用
+
+
+## 先掌握内置的一些模块
+- fs filesystem 操作文件都需要用这个模块
+- path 操作路径
+- vm 运行代码
+
+## 去用这些api实现一个commjs规范
